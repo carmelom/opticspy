@@ -49,6 +49,26 @@ def add(self,number,radius,thickness,glass,STO,output):
                             __diameter__=0)
     self.surface_list.append(New_Surface)
 
+
+# Terrible library
+def print_add_surface(number,radius,thickness,glass,STO,output=True):
+    if output == True:
+        s1 = str(number)
+        s2 = outputjudge(radius)
+        s3 = outputjudge(thickness)
+        s4 = glass
+        s5 = str(STO)
+        print('-----------------------Add surface:-------------------------------')
+        print('------------------------------------------------------------------')
+        print("| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
+                    format('Num','Radius','Thickness','Glass','STO'))
+        print('------------------------------------------------------------------')
+        print("| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
+                    format(s1,s2,s3,s4,s5))
+        print('------------------------------------------------------------------')
+    else:
+        print('Add surface: ',str(number))
+
 def outputjudge(number):
     if number >= 1000000 or number <= -1000000:
         s = 'Infinity'
@@ -69,7 +89,3 @@ def outputjudge(number):
 
 def list_index(self):
     print(self.indexlist)
-
-
-
-

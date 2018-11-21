@@ -255,4 +255,3 @@ def X_fan_field_wave(Lens,field_num,wave_num):
     xy_list = __np__.asarray(xy_list)
     xy_list = __np__.transpose(xy_list)
     return xy_list
-

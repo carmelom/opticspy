@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
 import numpy as np
-import trace
+from . import trace
 # All lens drawing and ray drawing functions
 
 def draw_surface(r,x0,d1,d2):
@@ -25,6 +25,9 @@ def draw_surface(r,x0,d1,d2):
         verts = verts_1[::-1] + verts_2[1:]
     elif d1 < d2:
         verts = [[verts_1[-1][0],d2/2]] + verts_1[::-1] + verts_2[1:] + [[verts_2[-1][0],-d2/2]]
+    else:
+        raise ValueError(f'd1 > d2 case: {d1} > {d2}')
+        ## FIXME what if d1 > d2 instead?
     codes.append(Path.MOVETO)
     for j in range(len(verts)-1):
         codes.append(Path.LINETO)
@@ -147,8 +150,8 @@ def draw_system(Lens):
     d = max(draw_diameter_list)
     ax.set_ylim(-d/4*3,d/4*3)
     plt.axis('equal')
-    plt.show()
-
+    # plt.show()
+    return fig, ax
 
 def draw_rays(Lens):
     '''
@@ -181,7 +184,3 @@ def draw_line(Lens,ray_tracing):
     path = Path(verts,codes)
     #print verts
     return path
-
-
-
-
