@@ -35,7 +35,7 @@ def draw_surface(r,x0,d1,d2):
 
 
 
-def draw_system(Lens):
+def draw_system(Lens, ax=None):
     print('------------------start drawing lens system-------------')
     # adjust diameter
     surface_list = Lens.surface_list
@@ -88,10 +88,13 @@ def draw_system(Lens):
         for s_index in unit_list:
             draw_diameter_list[s_index] = max_diameter_list[k]
 
-    fig = plt.figure(figsize=(12, 6))
+    if ax is None:
+        fig = plt.figure(figsize=(12, 6))
+        ax = fig.add_subplot(111)
+    else:
+        fig = ax.figure
     fig.canvas.set_window_title('View Lens')
     fig.suptitle('View Lens: '+Lens.lens_name, fontsize="x-large")
-    ax = fig.add_subplot(111)
     thinkness_list = []
     start_end_list = []
     verts_list = []
@@ -142,11 +145,16 @@ def draw_system(Lens):
     'start drawing rays'
     path_list = draw_rays(Lens)
     m = 0
-    color_list = ['red']*3+['green']*3+['blue']*3
+    color_list = [j for i in [3*[f'C{j}'] for j in range(4)] for j in i] # PURE BLACK MAGIC
+    # color_list = ['red']*3+['green']*3+['blue']*3
     for path, linecolor in zip(path_list,color_list):
         patch1 = patches.PathPatch(path, facecolor='none',fill=0, lw=1,edgecolor=linecolor)
         ax.add_patch(patch1)
-    ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
+    s0 = Lens.surface_list[0].thickness
+    OAL = sum([s.thickness for s in Lens.surface_list])
+    print('TOTAL LENGTH', OAL)
+    ax.set_xlim(-0.05*OAL - s0, 1.05*OAL - s0)
+    # ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
     d = max(draw_diameter_list)
     ax.set_ylim(-d/4*3,d/4*3)
     plt.axis('equal')

@@ -51,7 +51,7 @@ def add(self,number,radius,thickness,glass,STO,output):
 
 
 # Terrible library
-def print_add_surface(number,radius,thickness,glass,STO,output=True):
+def print_add_surface(number,radius,thickness,glass,STO,output=True, closing=True):
     if output == True:
         s1 = str(number)
         s2 = outputjudge(radius)
@@ -65,9 +65,26 @@ def print_add_surface(number,radius,thickness,glass,STO,output=True):
         print('------------------------------------------------------------------')
         print("| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
                     format(s1,s2,s3,s4,s5))
-        print('------------------------------------------------------------------')
+        if closing:
+            print('------------------------------------------------------------------')
     else:
         print('Add surface: ',str(number))
+
+def print_surface_list(Lens,):
+    print('Lens {:s} surface list'.format(Lens.lens_name))
+    print('------------------------------------------------------------------')
+    print("| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
+    format('Num','Radius','Thickness','Glass','STO'))
+    for S in Lens.surface_list:
+        s1 = str(S.number)
+        s2 = outputjudge(S.radius)
+        s3 = outputjudge(S.thickness)
+        s4 = S.glass
+        s5 = str(S.STO)
+        print('------------------------------------------------------------------')
+        print("| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
+                    format(s1,s2,s3,s4,s5))
+    print('------------------------------------------------------------------')
 
 def outputjudge(number):
     if number >= 1000000 or number <= -1000000:

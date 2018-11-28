@@ -21,7 +21,7 @@ import os
 import yaml
 import sys
 import argparse
-import numpy 
+import numpy
 
 
 class RefractiveIndex:
@@ -70,6 +70,7 @@ class RefractiveIndex:
                 filepath = os.path.join(self.referencePath,root,filename)
                 break
         return filepath
+
         # """
 
         # :param shelf:

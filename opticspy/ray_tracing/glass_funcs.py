@@ -21,12 +21,14 @@ def glass2indexlist(wavelength_list,glassname):
 		lens_index_list = [1]*wavelength_num
 		return lens_index_list
 	else:
+		# this ABSOLUTELY REQUIRES that glass name is page_book with NO OTHER UNDERSCORES
+		# you fucking bastard
 		n = glassname.find('_')
 		glass_catalog_name = glassname[n+1:]
 		glass_name = glassname[:n]
 		catalog = RefractiveIndex()
 		for w in wavelength_list:
-			mat = catalog.getMaterial('glass', glass_catalog_name, glass_name)
+			mat = catalog.getMaterial('glass', glass_catalog_name, glass_name) # shelf, book, page
 			n = mat.getRefractiveIndex(w)
 			lens_index_list.append(round(n,6))
 	return lens_index_list
@@ -92,4 +94,3 @@ def output(wavelength_list,lens_index_list):
 # 			return (index_list[n]+index_list[n])/2
 # 		else:
 # 			n = n + 1
-

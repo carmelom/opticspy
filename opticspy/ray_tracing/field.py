@@ -29,7 +29,7 @@ def add_field_YAN(Lens,angle):
     angle: Object angle
     '''
     Lens.field_angle_list.append(angle)
-    print('Add field angle:'+str(angle)+' degree done')
+    print('Add field angle: '+str(angle)+' degree done')
 
 
 def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
@@ -40,7 +40,7 @@ def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
 def grid2rays(Lens,grid_list,angle):
     field_rays_list = []
     EPD = Lens.EPD
-    EP = Lens.EP_thickness
+    EP = Lens.EP
     field_rays_list = []
     l = __np__.sin(angle/180*__np__.pi)
     m = __np__.cos(angle/180*__np__.pi)
@@ -130,11 +130,3 @@ def X_fan_rays_generator(Lens,n,angle):
         grid_list.append([x1,y1])
     field_rays_list = grid2rays(Lens,grid_list,angle)
     return field_rays_list
-
-
-
-
-
-
-
-

@@ -175,7 +175,7 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=0,end=0,output=False,output_
     '''
     #print '-------------------ray tracing------------------'
     ray_tracing = []
-    EP = Lens.EP_thickness
+    EP = Lens.EP
     EPD = Lens.EPD
     # print 'Entrance pupil position',EP
     # print 'Entrance pupil diameter',EPD
@@ -295,10 +295,3 @@ def ray2dict(ray_tracing):
         ray_dict['M'].append(KLM[2])
         ray_dict['Num'].append(n)
     return ray_dict
-
-
-
-
-
-
-
